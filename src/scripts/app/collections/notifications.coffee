@@ -10,14 +10,10 @@ class Notifications extends Backbone.Collection
   selected: null
 
   setSelected: (m) ->
-    console.log @.selected
     if @.selected
-      console.log 'abc'
-      @.selected.set {clickStatus: ''}
-
-    m.set {clickStatus: 'active'}
+      @.selected.set {clickStatus: null}
     @.selected = m
-
+    @.selected.set {clickStatus: 'active'}
 
   parse: (res) ->
     r = _.map res, (data) ->
@@ -35,7 +31,5 @@ class Notifications extends Backbone.Collection
           creatorAvatarHash: data.memberCreator.avatarHash
           creatorInitials: data.memberCreator.initials
       }
-    console.log r
-    r
 
 module.exports = Notifications

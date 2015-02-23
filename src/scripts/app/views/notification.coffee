@@ -15,40 +15,39 @@ class NotificationView extends Backbone.View
         <div class="member-initial"><%= creatorInitials %></div>
       </div>
       <div class="content"><%= text %></div>
+      <ul class='message-panel'>
+        <li class="icon-read panel-action"></li>
+      </ul>
     </div>
+    <form class='reply-form'>
+      <input type="text" name="text" placeholder="Reply" class="reply-content">
+    </form>
   '''
   events:
-    'click': 'showReplyForm'
-    'mouseover': 'showPanel'
-    'mouseleave': 'hidePanel'
+    'click .message': 'showReplyForm'
+    'mouseover .message': 'showPanel'
+    'mouseleave .message': 'hidePanel'
   
   initialize: ->
     @listenTo @model, 'change', @render
-
-  render: ->
-    console.log 'render'
-    $(@el).addClass @model.get('clickStatus')
-    @.$el.html @template(@model.toJSON())
-    @
+    
+    commentModel = new Comment({cardId: @.model.get('cardId')})
+    @commentFormView = new CommentFormView({parent: @, model: commentModel})
+    
+    @panelView = new MsgPanelView({parent: @}) 
 
   showReplyForm: ->
-    # @model.setSelected()
+    @.model.setSelected()
 
-    unless @commentFormView
-      commentModel = new Comment({cardId: @.model.get('cardId')})
-      @commentFormView = new CommentFormView({parent: @, model: commentModel})
-      @.$el.append @commentFormView.render().el
+  render: ->
+    $(@el).removeClass 'active'
+    $(@el).addClass @model.get('clickStatus')
+    @.$el.html @template(@model.toJSON())
+    @commentFormView.setElement(@.$el.find('.reply-form'))
+    @panelView.setElement(@.$el.find('.message-panel'))
+    @
 
   read: ->
     @model.putDoc({unread: false, readStatus: 'read'})
 
-  showPanel: ->
-    unless @panelView
-      @panelView = new MsgPanelView({parent: @}) 
-      @.$el.find('.message').append @panelView.render().el
-
-  hidePanel: ->
-    @panelView.remove()
-    delete @panelView
-  
 module.exports = NotificationView

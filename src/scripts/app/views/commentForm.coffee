@@ -3,21 +3,11 @@ _        = require 'underscore'
 
 
 class commentFormView extends Backbone.View
-  tagName: 'form'
-  className: 'reply-form'
-  template: _.template '''
-    <input type="text" name="text" placeholder="Reply" class="reply-content">
-  '''
-
   events: 
     'submit': 'onSubmit'
 
   initialize: (options) ->
     @parent = options.parent
-
-  render: ->
-    @.$el.html @template()
-    @
 
   onSubmit: (e) ->
     e.preventDefault()

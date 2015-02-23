@@ -36,6 +36,9 @@ body
       margin: 10px -10px
       +transition(0.3s)
 
+      .reply-form
+        display: block
+
   .message
     display: flex
     position: relative
@@ -47,6 +50,10 @@ body
 
     &.unread
       font-weight: bolder
+
+    &:hover
+      .message-panel
+        display: block
     
   .content
     text-overflow: ellipsis
@@ -71,7 +78,7 @@ body
     +border-radius(50%)
 
 .reply-form
-  // padding: 16px 22px
+  display: none
   background-color: #f6f6f6
   border-top: 1px solid #e5e5e5
   cursor: text
@@ -91,6 +98,7 @@ body
       outline: 0
 
 .message-panel
+  display: none
   padding: 10px
   
   .panel-action
