@@ -1,0 +1,110 @@
+@import compass/reset
+@import compass/css3
+
+body
+  font-family: sans-serif
+  background: #ececec
+
+.list-items-container
+  cursor: pointer
+  max-width: 840px
+  width: 100%
+  margin: 0 auto
+  +box-sizing(border-box)
+
+  @media screen and (max-width: 900px)
+    padding: 0 20px
+
+  .list-item
+    background: white
+    position: relative
+   
+    &:before
+      content: ''
+      display: block
+      pointer-events: none
+
+      position: absolute
+      left: 0
+      right: 0
+      top: 0
+      bottom: 0
+
+      +box-shadow(0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24))
+
+    &.active
+      margin: 10px -10px
+      +transition(0.3s)
+
+  .message
+    display: flex
+    position: relative
+    // background: white
+    margin: 1px 0
+
+    &.read
+      font-weight: normal
+
+    &.unread
+      font-weight: bolder
+    
+  .content
+    text-overflow: ellipsis
+    word-wrap: break-word
+    white-space: nowrap
+    overflow: hidden
+    padding-top: 16px
+    flex: 1
+
+  .member
+    width: 30px
+    height: 30px
+    padding: 10px 22px
+    
+  .member-initial
+    width: 100%
+    height: 30px
+    line-height: 30px
+    background: #f04e2f
+    color: rgba(255,255,255,0.7)
+    text-align: center
+    +border-radius(50%)
+
+.reply-form
+  // padding: 16px 22px
+  background-color: #f6f6f6
+  border-top: 1px solid #e5e5e5
+  cursor: text
+
+  &:hover
+    background-color: #fff
+
+  .reply-content
+    padding: 16px 22px
+    border: 0
+    background: inherit
+    width: 100%
+    +box-sizing(border-box)
+    font-size: 14px
+
+    &:focus
+      outline: 0
+
+.message-panel
+  padding: 10px
+  
+  .panel-action
+    display: inline-block
+    background-position: center
+    background-size: 24px
+    height: 24px
+    vertical-align: top
+    width: 24px
+    +opacity(0.25)
+
+    &:hover
+      opacity: 1
+  
+  .icon-read
+    background-image: url(//ssl.gstatic.com/bt/C3341AA7A1A076756462EE2E5CD71C11/1x/ic_mark-done_blk_24dp_r4.png)
+
