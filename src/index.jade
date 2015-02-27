@@ -14,6 +14,11 @@ html.no-js
       | Please <a href="http://browsehappy.com/">upgrade your browser</a>
       | to improve your experience.
     <![endif]-->
+    nav
+      .nav-bar-container
+        .search-bar#search-bar
+          input.search-input(type='text', placeholder='Search')
+
 
     div
       //- h1 Trello App
@@ -33,7 +38,8 @@ html.no-js
             input.reply-content(type='text', name='text', placeholder='Reply')
             input(type='submit', style='display: none')
 
-    
+    script(src='https://code.jquery.com/jquery-2.1.3.min.js')
+    script(src='https://api.trello.com/1/client.js?key=154407f68384bde233183669d08042d5')
     script(src="scripts/app.js")
     
   //- Google Analytics: change UA-XXXXX-X to be your site's ID.

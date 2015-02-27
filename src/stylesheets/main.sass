@@ -5,15 +5,59 @@ body
   font-family: sans-serif
   background: #ececec
 
+.nav-bar-container
+  height: 56px
+  width: 100%
+  position: fixed
+  top: 0
+  display: flex
+  background: #4285f4
+
+  &:before
+    content: ""
+    height: 56px
+    left: -2%
+    position: fixed
+    z-index: -1
+    width: 104%
+    +box-shadow(0 0 4px rgba(0,0,0,.14),0 4px 8px rgba(0,0,0,.28))
+
+.search-bar
+  background: rgba(255,255,255,.15)
+  +border-radius(2px)
+  width: 80%
+  margin: auto
+  +transition(0.1s)
+
+  &:hover
+    background: rgba(255,255,255,.35)
+
+  .search-input
+    height: 36px
+    width: 100%
+    padding: 0 10px
+    background: none
+    border: 0
+    font-size: 16px
+    color: rgba(255,255,255,.8)
+    +input-placeholder
+      color: rgba(255,255,255,.6)
+
+    &:focus
+      outline: 0
+
+
 .list-items-container
   cursor: pointer
   max-width: 840px
   width: 100%
+  padding-top: 76px
   margin: 0 auto
   +box-sizing(border-box)
 
   @media screen and (max-width: 900px)
     padding: 0 20px
+    padding-top: 76px
 
   .list-item
     background: white
