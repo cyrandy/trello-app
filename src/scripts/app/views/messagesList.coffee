@@ -5,11 +5,15 @@ _               = require 'underscore'
 
 NotificationView = require('../views/notification')
 
-class NotificationsList extends Backbone.View
+class MessagesList extends Backbone.View
   initialize: ->
     @.listenTo @collection, 'sync', @render
     # @.listenTo @collection, 'add', @render
-    @.setElement $('.list-items-container')
+    # @.setElement $('.list-items-container')
+    @render()
+
+  getElement: ->
+    $('.list-items-container')
 
   render: ->
     notificationsView = @collection.models.map (noti) ->
@@ -18,4 +22,4 @@ class NotificationsList extends Backbone.View
     @$el.html notificationsView
     @
 
-module.exports = NotificationsList
+module.exports = MessagesList

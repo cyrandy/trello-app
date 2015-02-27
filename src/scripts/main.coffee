@@ -5,7 +5,7 @@ $                   = require 'jquery-untouched'
 Backbone            = require 'Backbone'
 _                   = require 'underscore'
 MainView            = require './app/views/app'
-mainView            = new MainView()
+mainView            = MainView.getInstance()
 metions             = mainView.metions
 
 AppRouter           = require './app/routers/app'

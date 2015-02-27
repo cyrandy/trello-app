@@ -1,7 +1,6 @@
 Backbone = require 'backbone'
 _        = require 'underscore'
 
-
 class commentFormView extends Backbone.View
   events: 
     'submit': 'onSubmit'

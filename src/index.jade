@@ -15,39 +15,14 @@ html.no-js
       | to improve your experience.
     <![endif]-->
     nav
-      .nav-bar-container
-        .search-bar#search-bar
+      .nav-bar-container#search-bar
+        .home
+          | Home
+        .search-bar
           input.search-input(type='text', placeholder='Search')
+    .main
 
-
-    div
-      //- h1 Trello App
-      //- :markdown
-      //-   This repo is an opinionated scaffolding, utilizing **Coffeescript** (*because screw semi-colons*), **Browserify** (*because node is awesome*), **Gulp** (*because .pipe(task) is amazing*), and **Jade** templates (*because America*).
-      .list-items-container
-        .list-item
-          .message
-            .member
-              .member-initial
-                | C
-            .content
-              | abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc
-            ul.message-panel
-              li.icon-read.panel-action
-          form.reply-form
-            input.reply-content(type='text', name='text', placeholder='Reply')
-            input(type='submit', style='display: none')
 
     script(src='https://code.jquery.com/jquery-2.1.3.min.js')
     script(src='https://api.trello.com/1/client.js?key=154407f68384bde233183669d08042d5')
     script(src="scripts/app.js")
-    
-  //- Google Analytics: change UA-XXXXX-X to be your site's ID.
-  //-
-    script
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
