@@ -2,14 +2,13 @@
 
 co                  = require 'co'
 $                   = require 'jquery-untouched'
+Backbone            = require 'Backbone'
 _                   = require 'underscore'
+MainView            = require './app/views/app'
+mainView            = new MainView()
+metions             = mainView.metions
 
-Metions             = require './app/collections/notifications'
-data                = require './data.json'
-metions             = new Metions()
-
-MessageListView     = require './app/views/notificationsList'
-messageListView     = new MessageListView {collection: metions}
+AppRouter           = require './app/routers/app'
 
 db                  = require './app/utils/db'
 
@@ -31,6 +30,7 @@ fetchLocalDb = () -> co ->
 
 # TODO: render should wait until fetch from server done
 updateLocalDb = (collection, response, opts) -> co ->
+  # console.log collection
   currentDocs = yield db.allDocs()
   currentIds = _.map currentDocs.rows, (d) ->
     d.id
@@ -48,8 +48,22 @@ updateLocalDb = (collection, response, opts) -> co ->
 .catch (err) ->
   console.log err
 
+# Trello.authorize
+#   type: "popup",
+#   success: onAuthorize,
+#   scope: { write: true, read: true }
+
+onAuthorize = ->
+  console.log 'success'
 co ->
   yield fetchLocalDb()
   yield metions.fetch({merge: false, add: true, success: updateLocalDb})
 .catch (err) ->
   console.log err
+
+$ ->
+  window.app = new AppRouter()
+  Backbone.history.start {
+    root: '/'
+    pushState: false
+  }
