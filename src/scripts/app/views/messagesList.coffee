@@ -9,7 +9,6 @@ class MessagesList extends Backbone.View
   initialize: ->
     @.listenTo @collection, 'sync', @render
     # @.listenTo @collection, 'add', @render
-    # @.setElement $('.list-items-container')
     @render()
 
   getElement: ->

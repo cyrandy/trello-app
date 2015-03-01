@@ -1,12 +1,12 @@
 Backbone = require 'Backbone'
 _        = require 'underscore'
-token    = require('../utils/token')()
-co       = require 'co'
-db       = require '../utils/db'
+auth    = require('../utils/auth')
 
 class Notifications extends Backbone.Collection
   model: require '../models/notification'
-  url: "https://api.trello.com/1/members/my/notifications?key=154407f68384bde233183669d08042d5&token=#{token}&filter=mentionedOnCard"
+  url: ->
+    token = auth.getToken()
+    "https://api.trello.com/1/members/my/notifications?key=154407f68384bde233183669d08042d5&token=#{token}&filter=mentionedOnCard"
   selected: null
 
   setSelected: (m) ->

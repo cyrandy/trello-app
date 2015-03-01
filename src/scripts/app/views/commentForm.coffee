@@ -1,12 +1,15 @@
 Backbone = require 'backbone'
 _        = require 'underscore'
+auth     = require '../utils/auth'
 
 class commentFormView extends Backbone.View
-  events: 
+  events:
     'submit': 'onSubmit'
 
   initialize: (options) ->
     @parent = options.parent
+    @model.set
+      token: auth.getToken()
 
   onSubmit: (e) ->
     e.preventDefault()
