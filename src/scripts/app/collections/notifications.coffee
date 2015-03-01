@@ -1,12 +1,15 @@
 Backbone = require 'Backbone'
 _        = require 'underscore'
 auth    = require('../utils/auth')
+key     = require('../utils/key')()
+db      = require('../utils/db').getInstance()
+co      = require 'co'
 
 class Notifications extends Backbone.Collection
   model: require '../models/notification'
   url: ->
     token = auth.getToken()
-    "https://api.trello.com/1/members/my/notifications?key=154407f68384bde233183669d08042d5&token=#{token}&filter=mentionedOnCard"
+    "https://api.trello.com/1/members/my/notifications?key=#{key}&token=#{token}&filter=mentionedOnCard"
   selected: null
 
   setSelected: (m) ->
@@ -31,5 +34,18 @@ class Notifications extends Backbone.Collection
           creatorAvatarHash: data.memberCreator.avatarHash
           creatorInitials: data.memberCreator.initials
       }
+
+  fetchLocalDb: () -> co ->
+    currentDocs = yield db.allDocs {include_docs: true}
+    docs = _.chain currentDocs.rows
+      .map ({doc}) ->
+        doc.cdate = new Date(doc.cdate)
+        doc
+      .sortBy (doc) ->
+        return -doc.cdate.getTime()
+      .map (doc) ->
+        doc.cdate = doc.cdate.toString()
+        doc
+      .value()
 
 module.exports = Notifications

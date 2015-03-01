@@ -5,13 +5,13 @@ class SearchResultsView extends Backbone.View
   template: _.template '''
     <% _.each(boards, function(board) { %>
       <div class="board-container">
-        <p><%= board[0][0].boardName %></p>
+        <p class="normal-margin-btm"><%= board[0][0].boardName %></p>
         <% _.each(board, function(list) { %>
           <div class="list">
-            <p><%= list[0].listName %></p>
+            <p class="normal-margin-btm"><%= list[0].listName %></p>
             <div class="list-cards">
             <% _.each(list, function(card) { %>
-              <div class="card"><%= card.name %></div>
+              <a class="card" target="_blank" href="<%= card.shortUrl %>"><%= card.name %></a>
             <% }); %>
             </div>
           </div>
@@ -19,36 +19,39 @@ class SearchResultsView extends Backbone.View
       </div>
     <% }); %>
   '''
+  emptyTpl: _.template '''
+    <p class='notfound'>No results.</p>
+  '''
+  loadingTpl: _.template '''
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+    </div>
+  '''
+
   initialize: ->
     @.listenTo @collection, 'sync', @render
+    @.listenTo @collection, 'error', @renderEmpty
+    @.listenTo @collection, 'fetch', @loading
 
   getElement: ->
     $('.search-results')
 
   render: ->
-    # console.log @collection.models.toJSON()
-    # console.log _.map @collection.models, (model) ->
-    #   return _.toArray model.attributes
-    # boards = @collection.models[0]?.attributes
-    # console.log @collection.models
-
     boards = _.map @collection.models, (model) ->
       return _.toArray model.attributes
-    # console.log boards
-    # # console.log @collection.models[0].attributes
-    # # console.log boards
-    # # console.log '---------'
-    # _.each boards, (board) ->
-    #   console.log 'Board: ' + board[0][0].boardName
-    #   # console.log _.toArray board
-
-    #   _.each board, (list) ->
-    #     console.log 'List: ' + list[0].listName
-
-    #     _.each list, (card) ->
-    #       console.log 'card - ' + card.name
-    @$el.html @template({boards})
+    if boards.length
+      @$el.html @template({boards})
+    else
+      @renderEmpty()
     @
 
+  renderEmpty: ->
+    @$el.html @emptyTpl()
+
+  loading: ->
+    @$el.html @loadingTpl()
 
 module.exports = SearchResultsView

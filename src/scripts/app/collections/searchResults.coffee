@@ -1,12 +1,17 @@
 Backbone = require 'Backbone'
 _        = require 'underscore'
 auth    = require('../utils/auth')
+key     = require('../utils/key')()
 
 class SearchResults extends Backbone.Collection
   model: require '../models/searchResult'
   url: ->
     token = auth.getToken()
-    "https://api.trello.com/1/search?key=154407f68384bde233183669d08042d5&token=#{token}&card_board=true&card_list=true"
+    "https://api.trello.com/1/search?key=#{key}&token=#{token}&card_board=true&card_list=true"
+
+  fetch: (options) ->
+    @.trigger('fetch', @, options);
+    Backbone.Collection.prototype.fetch.call(@, options)
 
   parse: (res) ->
     r = _.map res.cards, (data) ->

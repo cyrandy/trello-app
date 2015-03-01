@@ -1,9 +1,10 @@
 Backbone = require 'backbone'
 auth    = require('../utils/auth')
+key     = require('../utils/key')()
 
 class Comment extends Backbone.Model
   defaults: {
-    key: '154407f68384bde233183669d08042d5'
+    key: key
     cardId: ''
     text: ''
   }

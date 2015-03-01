@@ -1,6 +1,6 @@
 Backbone = require 'Backbone'
 _        = require 'underscore'
-db       = require '../utils/db'
+db       = require('../utils/db').getInstance()
 
 class Notification extends Backbone.Model
   defaults: {
@@ -9,7 +9,7 @@ class Notification extends Backbone.Model
 
   setSelected: ->
     @.collection.setSelected(@)
-    
+
   putDoc: (opts) ->
     @.set opts
     db.get @.get('id'), (err, res) =>
