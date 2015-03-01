@@ -9,10 +9,22 @@ $grid-padding: 20px
 
 .board-container
   +isolate-grid(3)
+  margin-bottom: 20px
+
+  @media screen and (max-width: 900px)
+    +isolate-grid(4)
+
+  @media screen and (max-width: 600px)
+    +isolate-grid(6)
+
+  @media screen and (max-width: 480px)
+    +isolate-grid(12)
+
 
 .list
   background: #e2e4e6
-  padding: 4px 3px 3px
+  padding: 10px 7px
+  margin-bottom: 10px
   +border-radius(3px)
 
 .list-card
@@ -22,7 +34,13 @@ $grid-padding: 20px
   display: block
   padding: 8px 10px
   border-bottom: 1px solid #ccc
-  margin-bottom: 10px
 
   background: white
   +border-radius(3px)
+
+  & + &
+    margin-top: 10px
+
+.notfound
+  text-align: center
+  color: #aaa

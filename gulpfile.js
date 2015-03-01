@@ -1,5 +1,5 @@
 var gulp            = require('gulp'),
-    // this is an arbitrary object that loads all gulp plugins in package.json. 
+    // this is an arbitrary object that loads all gulp plugins in package.json.
     $           = require("gulp-load-plugins")(),
     path        = require('path'),
     browserSync = require('browser-sync'),
@@ -28,14 +28,6 @@ gulp.task('compass', function() {
 gulp.task('coffee', function() {
   return gulp.src('src/scripts/main.coffee', { read: false })
     .pipe($.plumber())
-    // .pipe($.coffeeify({
-    //   aliases: [
-    //     {
-    //       cwd: 'src/scripts/app',
-    //       base: 'app'
-    //     }
-    //   ]
-    // }))
     .pipe($.browserify({
       debug: true,
       insertGlobals: false,
@@ -61,15 +53,15 @@ gulp.task('templates', function() {
 });
 
 gulp.task('default',['compass','coffee','images','templates','browser-sync'], function () {
-  
+
   gulp.watch('src/stylesheets/*.sass',['compass', reload]);
 
   gulp.watch('src/scripts/*.coffee',['coffee', reload]);
-  
+
   gulp.watch('src/images/**/*',['images', reload]);
 
   gulp.watch('src/*.jade',['templates', reload]);
-    
+
 });
 
 
