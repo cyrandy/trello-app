@@ -14,6 +14,7 @@ class AppView extends Backbone.View
   el: $('.main')
   template: _.template '''
     <div class="list-items-container"></div>
+    <div class="search-results"></div>
   '''
 
   initialize: ->

@@ -1,6 +1,9 @@
-Backbone        = require 'Backbone'
-AppView         = require '../views/app'
-MessagesListView = require '../views/messagesList'
+Backbone          = require 'Backbone'
+AppView           = require '../views/app'
+MessagesListView  = require '../views/messagesList'
+SearchResults     = require '../collections/searchResults'
+SearchResultsView = require '../views/searchResults'
+
 
 class AppRouter extends Backbone.Router
   routes:
@@ -15,6 +18,9 @@ class AppRouter extends Backbone.Router
     @appView.setChildView @messagesListView
 
   searchCard: ->
-    @appView.setChildView()
+    @searchResults = new SearchResults()
+    @searchResultsView = new SearchResultsView({collection: @searchResults})
+
+    @appView.setChildView @searchResultsView
 
 module.exports = AppRouter
