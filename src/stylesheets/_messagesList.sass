@@ -35,6 +35,29 @@
 
       .reply-form
         display: block
+        position: relative
+
+
+  .reply-form
+    .onsuccess
+      display: none
+      position: absolute
+      right: 10px
+      top: 50%
+      margin-top: -10px
+    .spinner
+      display: none
+      position: absolute
+      right: 0
+      top: 50%
+      margin-top: -15px
+    &.loading
+      .spinner
+        display: block
+    &.success
+      .onsuccess
+        display: block
+
 
   .message
     display: flex
@@ -73,3 +96,4 @@
     color: rgba(255,255,255,0.7)
     text-align: center
     +border-radius(50%)
+

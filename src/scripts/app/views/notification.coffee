@@ -21,20 +21,27 @@ class NotificationView extends Backbone.View
     </div>
     <form class='reply-form'>
       <input type="text" name="text" placeholder="Reply" class="reply-content">
+      <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+      </div>
+      <p class='onsuccess'>Message SENT!</p>
     </form>
   '''
   events:
     'click .message': 'showReplyForm'
     'mouseover .message': 'showPanel'
     'mouseleave .message': 'hidePanel'
-  
+
   initialize: ->
     @listenTo @model, 'change', @render
-    
+
     commentModel = new Comment({cardId: @.model.get('cardId')})
     @commentFormView = new CommentFormView({parent: @, model: commentModel})
-    
-    @panelView = new MsgPanelView({parent: @}) 
+
+    @panelView = new MsgPanelView({parent: @})
 
   showReplyForm: ->
     @.model.setSelected()
