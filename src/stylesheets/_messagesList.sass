@@ -15,6 +15,7 @@
   .list-item
     background: white
     position: relative
+    +transition(0.3s)
 
     &:before
       content: ''
@@ -31,7 +32,6 @@
 
     &.active
       margin: 10px -10px
-      +transition(0.3s)
 
       .reply-form
         display: block

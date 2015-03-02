@@ -13,10 +13,13 @@ class Notifications extends Backbone.Collection
   selected: null
 
   setSelected: (m) ->
-    if @.selected
-      @.selected.set {clickStatus: null}
-    @.selected = m
-    @.selected.set {clickStatus: 'active'}
+    if @selected
+      @selected.set {clickStatus: null}
+    @selected = m
+    @selected.set {clickStatus: 'active'}
+
+  resetSelected: ->
+    @selected.set {clickStatus: ''} if @selected
 
   parse: (res) ->
     r = _.map res, (data) ->
