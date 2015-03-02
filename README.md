@@ -3,11 +3,16 @@
 ### Environment Require
 - Node v0.12.0
 
-### Config File
+### Config Your Developer Key
 Set your trello developer key in `src/scripts/app/utils/key.coffee`
 ```
 module.exports = ->
   'YOUR KEY HERE'
+```
+and
+`src/index.jade` line 31
+```
+script(src='https://api.trello.com/1/client.js?key=YOUR_KEY_HERE')
 ```
 
 ### Setup step
