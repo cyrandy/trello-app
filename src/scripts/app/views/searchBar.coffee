@@ -14,6 +14,7 @@ class SearchBarView extends Backbone.View
     'keyup .search-bar': 'onInput'
 
   goHome: ->
+    $('.search-input').val('')
     app.navigate '', {trigger: true, replace: true}
 
   initSearch: ->
@@ -21,11 +22,12 @@ class SearchBarView extends Backbone.View
     @searchResults = app.searchResults
 
   onInput: ->
-    @searchResults.fetch {
-      data: {
-        query: $('.search-input').val()
+    if $('.search-input').val() != ''
+      @searchResults.fetch {
+        data: {
+          query: $('.search-input').val()
+        }
       }
-    }
 
 
 module.exports = SearchBarView

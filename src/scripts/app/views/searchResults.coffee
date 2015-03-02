@@ -5,10 +5,10 @@ class SearchResultsView extends Backbone.View
   template: _.template '''
     <% _.each(boards, function(board) { %>
       <div class="board-container">
-        <p class="normal-margin-btm"><%= board[0][0].boardName %></p>
+        <a class="normal-margin-btm" href="https://trello.com/b/<%= board[0][0].boardId %>" target='_blank'><%= board[0][0].boardName %></a>
         <% _.each(board, function(list) { %>
           <div class="list">
-            <p class="normal-margin-btm"><%= list[0].listName %></p>
+            <a class="normal-margin-btm list-name" href="https://trello.com/b/<%= board[0][0].boardId %>" target='_blank'><%= list[0].listName %></a>
             <div class="list-cards">
             <% _.each(list, function(card) { %>
               <a class="card" target="_blank" href="<%= card.shortUrl %>"><%= card.name %></a>
