@@ -37,12 +37,4 @@ class AppView extends Backbone.View
     childView.setElement(childView.getElement()).render() if childView
     @
 
-instance = null
-
-AppView.getInstance = ->
-  unless instance
-    instance = new AppView({model: new AppViewModel()})
-
-  return instance
-
-module.exports = AppView
+module.exports = new AppView({model: new AppViewModel()})

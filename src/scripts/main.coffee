@@ -30,7 +30,7 @@ $ ->
   }
 
 derferred.promise.then ->
-  mainView            = MainView.getInstance()
+  mainView            = MainView
   metions             = mainView.metions
 
   co ->

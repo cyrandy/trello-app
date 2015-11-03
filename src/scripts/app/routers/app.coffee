@@ -11,7 +11,7 @@ class AppRouter extends Backbone.Router
     'search': 'searchCard'
 
   initialize: ->
-    @appView = AppView.getInstance()
+    @appView = AppView
 
   showMain: ->
     @messagesListView = new MessagesListView {collection: @appView.metions}
